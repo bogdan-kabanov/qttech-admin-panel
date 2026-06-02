@@ -21,11 +21,17 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www/html
 
+# Copy composer files first for better caching
+COPY composer.json composer.lock ./
+
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+
 # Copy application files
 COPY . /var/www/html
 
-# Install dependencies (without dev)
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Run post-install scripts
+RUN composer dump-autoload --optimize
 
 # Copy Nginx config
 COPY docker/nginx.conf /etc/nginx/sites-available/default
