@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -31,7 +31,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-script
 COPY . /var/www/html
 
 # Run post-install scripts
-RUN composer dump-autoload --optimize
+RUN composer dump-autoload --optimize --no-scripts
 
 # Copy Nginx config
 COPY docker/nginx.conf /etc/nginx/sites-available/default
