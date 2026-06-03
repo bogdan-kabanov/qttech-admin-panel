@@ -12,6 +12,13 @@ class EncryptCookies extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'XSRF-TOKEN-AK',
+        'XSRF-TOKEN-AD',
+        'XSRF-TOKEN-DU',
+        'XSRF-TOKEN-PI',
+        'XSRF-TOKEN-SB',
+        'XSRF-TOKEN-MS',
+        'XSRF-TOKEN-AI',
+        'XSRF-TOKEN-MI',
     ];
 }

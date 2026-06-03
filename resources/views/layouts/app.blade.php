@@ -118,7 +118,22 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 
         <script type="text/javascript">
-            
+
+            // Fallback: if cookies are not yet available (first visit), initialize Firebase directly
+            if (typeof firebase.apps !== 'undefined' && firebase.apps.length === 0) {
+                var firebaseConfig = {
+                    apiKey: "{{ env('FIREBASE_APIKEY') }}",
+                    authDomain: "{{ env('FIREBASE_AUTH_DOMAIN') }}",
+                    databaseURL: "{{ env('FIREBASE_DATABASE_URL') }}",
+                    projectId: "{{ env('FIREBASE_PROJECT_ID') }}",
+                    storageBucket: "{{ env('FIREBASE_STORAGE_BUCKET') }}",
+                    messagingSenderId: "{{ env('FIREBASE_MESSAAGING_SENDER_ID') }}",
+                    appId: "{{ env('FIREBASE_APP_ID') }}",
+                    measurementId: "{{ env('FIREBASE_MEASUREMENT_ID') }}"
+                };
+                firebase.initializeApp(firebaseConfig);
+            }
+
             var appLogo = '';
             var appFavIconLogo = '';
             var googleApiKey = '';
@@ -126,7 +141,7 @@
             let globalRef = database.collection('settings').doc('global');
             globalRef.get().then(async function(snapshots) {
                 var globalSetting = snapshots.data();
-                if (globalSetting.appVersion != '') {
+                if (globalSetting && globalSetting.appVersion != '') {
                     $(".web_version").text('V:' + globalSetting.appVersion);
                 }
             });
