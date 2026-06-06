@@ -267,10 +267,10 @@
                 fetchZones(),
                 database.collection('currency').where('enable', '==', true).get()
             ]);
-            langData = langRef.docs[0].data();
+            langData = langRef.docs.length ? langRef.docs[0].data() : null;
             createZoneTabs(zones);
-            let currencyData = refCurrency.docs[0].data();
-            $(".currentCurrency").text(currencyData.symbol);
+            let currencyData = refCurrency.docs.length ? refCurrency.docs[0].data() : {};
+            $(".currentCurrency").text(currencyData.symbol || '');
             
             jQuery("#overlay").hide();
         });
