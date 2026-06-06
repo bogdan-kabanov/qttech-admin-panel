@@ -267,7 +267,7 @@
                 fetchZones(),
                 database.collection('currency').where('enable', '==', true).get()
             ]);
-            langData = langRef.docs.length ? langRef.docs[0].data() : null;
+            langData = langRef.docs.length ? langRef.docs[0].data() : {code: 'en', name: 'English'};
             createZoneTabs(zones);
             let currencyData = refCurrency.docs.length ? refCurrency.docs[0].data() : {};
             $(".currentCurrency").text(currencyData.symbol || '');
@@ -607,7 +607,7 @@
         contentsContainer.innerHTML='';
         
         zones.forEach((zone,index) => {
-            const zoneData = zone.name.find(item => item.type === langData.code);
+            const zoneData = zone.name.find(item => item.type === langData.code) || zone.name[0] || {name: 'Zone'};
 
             const tab=document.createElement('li');
             tab.classList.add('nav-item');
