@@ -756,7 +756,7 @@
         const defaultLanguage=languages.find(language => language.isDefault);
         const otherLanguages=languages.filter(language => !language.isDefault);
         otherLanguages.sort((a,b) => a.name.localeCompare(b.name));
-        const sortedLanguages=[defaultLanguage,...otherLanguages];
+        const sortedLanguages=defaultLanguage ? [defaultLanguage,...otherLanguages] : otherLanguages;
         sortedLanguages.forEach((language,index) => {
             var defaultClass='';
             if(language.isDefault) {

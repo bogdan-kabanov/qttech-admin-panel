@@ -13,7 +13,7 @@ class FirebaseAuthService
         
 		if(!empty($request->serviceJson)){
 
-			Storage::disk('local')->put('firebase/credentials.json',file_get_contents(base64_decode($request->serviceJson)));
+			Storage::disk('local')->put('firebase/credentials.json', base64_decode($request->serviceJson));
 		}
     }
 

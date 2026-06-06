@@ -472,6 +472,10 @@
     }
 
     function createLanguageTabs(languages) {
+        if (!languages || languages.length === 0) {
+            console.warn('Языки не найдены в Firestore.');
+            return;
+        }
         const tabsContainer=document.getElementById('language-tabs');
         const contentsContainer=document.getElementById('language-contents');
         tabsContainer.innerHTML='';
@@ -479,7 +483,7 @@
         const defaultLanguage=languages.find(language => language.isDefault);
         const otherLanguages=languages.filter(language => !language.isDefault);
         otherLanguages.sort((a,b) => a.name.localeCompare(b.name));
-        const sortedLanguages=[defaultLanguage,...otherLanguages];
+        const sortedLanguages=defaultLanguage ? [defaultLanguage,...otherLanguages] : otherLanguages;
         sortedLanguages.forEach((language,index) => {
             var defaultClass='';
             if(language.isDefault) {

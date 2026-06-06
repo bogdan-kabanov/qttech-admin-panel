@@ -24,6 +24,10 @@ async function initializeFirebase() {
 
 async function authenticateFirebase() {
     try {
+        if (!firebase.apps || !firebase.apps.length) {
+            console.error("Firebase не инициализирован. Проверьте конфигурацию.");
+            return;
+        }
 
         const firebaseToken = $.cookie('firebase_token');
 
@@ -51,7 +55,7 @@ async function authenticateFirebase() {
         await storeJsonFile();
         
     } catch (error) {
-        console.error("Authentication Error:", error.message);
+        console.error("Authentication Error:", error?.message || error);
     }
 }
 
