@@ -179,12 +179,29 @@
                     }
             });
             $(document).ready(async function() {
+                // Show cached logo immediately if available
+                var cachedLogo = localStorage.getItem('appLogo');
+                var cachedFavicon = localStorage.getItem('appFavIconLogo');
+                if (cachedLogo) {
+                    $(".dark-logo").attr("src", cachedLogo);
+                    $(".light-logo").attr("src", cachedLogo);
+                    $(".dark-logo, .light-logo").css("opacity", "1");
+                }
+                if (cachedFavicon) {
+                    $("#favicon").attr("href", cachedFavicon);
+                }
+
                 let globalLogoRef = database.collection('settings').doc('logo');
                 globalLogoRef.get().then(async function(snapshots) {
                     var globalLogoSetting = snapshots.data();
-                    $("#favicon").attr("href", globalLogoSetting.appFavIconLogo)
-                    $(".dark-logo").attr("src", globalLogoSetting.appLogo);
-                    $(".light-logo").attr("src", globalLogoSetting.appLogo);
+                    if (globalLogoSetting && globalLogoSetting.appLogo) {
+                        $("#favicon").attr("href", globalLogoSetting.appFavIconLogo);
+                        $(".dark-logo").attr("src", globalLogoSetting.appLogo);
+                        $(".light-logo").attr("src", globalLogoSetting.appLogo);
+                        localStorage.setItem('appLogo', globalLogoSetting.appLogo);
+                        localStorage.setItem('appFavIconLogo', globalLogoSetting.appFavIconLogo);
+                    }
+                    $(".dark-logo, .light-logo").css("opacity", "1");
                 });
             });
             var refCurrency = database.collection('currency').where('enable', '==', true);

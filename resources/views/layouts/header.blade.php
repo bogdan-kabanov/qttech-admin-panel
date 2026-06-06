@@ -6,9 +6,9 @@
 
             <img src="{{ asset('images/goride-logo.png') }}" onerror="this.onerror=null; this.src='{{ asset('images/goride-logo.png') }}';" alt="homepage" class="dark-logo" width="100%"
 
-                 id="logo_web"> 
+                 id="logo_web" style="opacity:0;transition:opacity 0.3s"> 
 
-            <img src="{{ asset('images/goride-logo.png') }}" onerror="this.onerror=null; this.src='{{ asset('images/goride-logo.png') }}';"  alt="homepage" class="light-logo">
+            <img src="{{ asset('images/goride-logo.png') }}" onerror="this.onerror=null; this.src='{{ asset('images/goride-logo.png') }}';"  alt="homepage" class="light-logo" style="opacity:0;transition:opacity 0.3s">
 
         </b>
 
