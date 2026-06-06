@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title id="app_name">{{ config('app.name', 'GoRide') }}</title>
+    <title id="app_name">{{ config('app.name', 'QT Tech') }}</title>
     <link rel="icon" id="favicon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
